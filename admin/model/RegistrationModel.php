@@ -14,10 +14,16 @@ class Register
       $query = "INSERT INTO `users`(`id`, `USERNAME`, `E-MAIL`, `PASSWORD`) VALUES (NULL,'$username','$email','$password')";
       $res = mysqli_query($this->conn, $query);
    }
-   // public function check($email)
-   // {
-   //    $res = "SELECT * FROM ";
-   // }
+   public function check($email)
+   {
+      $query = "SELECT * FROM `users` WHERE email='$email'";
+      $res = mysqli_query($this->conn, $query);
+      if (mysqli_num_rows($res) > 0) {
+         return $result = '1';
+      } else {
+         return $result = '0';
+      }
+   }
    public function check_admin_login($username, $password)
    {
       $query = "SELECT 'USERNAME','PASSWORD' FROM users WHERE USERNAME='$username' AND PASSWORD='$password'";
@@ -29,4 +35,4 @@ class Register
       }
    }
 }
-$user = new Register();
+$Admin = new Register();

@@ -2,6 +2,7 @@
 session_start();
 include '../model/RegistrationModel.php';
 
+
 if (isset($_POST['action']) && $_POST['action'] == 'login') {
    $username = $_POST['username'];
    $password = sha1($_POST['password']);
