@@ -7,7 +7,8 @@
    <link rel="stylesheet" type="text/css" href="../asset/css/opensans-font.css">
    <link rel="stylesheet" type="text/css" href="../asset/fonts/line-awesome/css/line-awesome.min.css">
    <link rel="stylesheet" href="../asset/css/style.css" />
-   <link rel="icon" type="image/x-icon" href="https://cdn0.iconfinder.com/data/icons/insurance-line-color/512/Insurance_Policy-256.png">
+   <link rel="icon" type="image/x-icon"
+      href="https://cdn0.iconfinder.com/data/icons/insurance-line-color/512/Insurance_Policy-256.png">
    <title>Registration form</title>
 </head>
 
@@ -46,7 +47,8 @@
       </div>
    </div>
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
    <script src="../asset/js/script.js"></script>

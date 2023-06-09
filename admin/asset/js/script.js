@@ -9,7 +9,8 @@ $('.register').on('click', function (event) {
    let username = $('#username').val();
    let email = $('#your_email').val();
    let password = $('#password').val();
-   if (userNameVerify.test($('#username').val()) && emailVerify.test($('#your_email').val()) && passwordVerify.test($('#password').val()) && $('#password').val() === $('#comfirm_password').val()) {
+   if (userNameVerify.test($('#username').val()) && emailVerify.test($('#your_email').val())
+      && passwordVerify.test($('#password').val()) && $('#password').val() === $('#comfirm_password').val()) {
       $('.message').fadeIn(3000).text("you have successfully registered").fadeOut(3000).css({
          'display': 'flex',
          'justify-content': 'center',
