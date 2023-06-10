@@ -22,7 +22,7 @@
                         <div class="card-front">
                            <div class="center-wrap">
                               <div class="section text-center">
-                                 <h4 class="mb-4 pb-3 text-warning text-uppercase">Registration</h4>
+                                 <h4 class="mb-4 pb-3 text-warning text-uppercase">Sign Up</h4>
                                  <div class="form-group">
                                     <input type="text" name="username" class="form-style" placeholder="Your Full Name"
                                        id="username" autocomplete="off">
@@ -55,9 +55,12 @@
                                     name="register">
                                  <div class="alert alert-danger" role="alert" id="email_not_verify"
                                     style="display:none;"></div>
-
                                  <div class="alert alert-success mx-auto" role="alert" id="email_verify"
                                     style="display:none;"></div>
+
+                                 <p class="text-start text-warning text-uppercase fs-8 pt-4">Already have an account? <a
+                                       href="../view/login.php">Log in</a>
+                                 </p>
                               </div>
                            </div>
                         </div>
