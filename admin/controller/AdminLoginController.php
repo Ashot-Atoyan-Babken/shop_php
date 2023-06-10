@@ -5,9 +5,9 @@ include '../model/RegistrationModel.php';
 
 if (isset($_POST['action']) && $_POST['action'] == 'login') {
    $username = $_POST['username'];
-   $password = sha1($_POST['password']);
+   $password = $_POST['password'];
    if ($username != '' && $password != '') {
-      $check_admin_login = $user->check_admin_login($username, $password);
+      $check_admin_login = $Admin->check_admin_login($username, sha1($password));
       if ($check_admin_login > 0) {
          $returnArr['action'] = 1;
          $returnArr['message'] = 'you are logged in';

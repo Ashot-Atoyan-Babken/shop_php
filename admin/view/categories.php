@@ -7,8 +7,8 @@
    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
    <link rel="stylesheet" href="../asset/css/style.css">
-   <link rel="shortcut icon" href="../asset/img/svg/login.svg" type="image/x-icon">
-   <title>Login</title>
+   <link rel="shortcut icon" href="../asset/img/svg/category.svg" type="image/x-icon">
+   <title>Category</title>
 </head>
 
 <body style="background-color:#1f2029">
@@ -22,16 +22,12 @@
                         <div class="card-front">
                            <div class="center-wrap">
                               <div class="section text-center">
-                                 <h4 class="mb-4 pb-3 text-warning text-uppercase">Log In</h4>
+                                 <h4 class="mb-4 pb-3 text-warning text-uppercase">category</h4>
                                  <div class="form-group">
-                                    <input type="text" name="username" class="form-style username" placeholder="Your Username" id="logemail" autocomplete="off">
-                                    <i class="input-icon uil uil-at"></i>
+                                    <input type="text" name="category_title" class="form-style" id="category" placeholder="Your Category" autocomplete="off">
+                                    <i class="input-icon uil uil-list-ul"></i>
                                  </div>
-                                 <div class="form-group mt-2">
-                                    <input type="password" name="password" class="form-style password" placeholder="Your Password" id="logpass" autocomplete="off">
-                                    <i class="input-icon uil uil-lock-alt"></i>
-                                 </div>
-                                 <input class="btn mt-4 btn-dark login" type="submit" value="LOG IN" name="action">
+                                 <input class="btn mt-4 btn-dark category" type="submit" value="Create category" name="category">
                                  <div class="alert alert-success mx-auto" role="alert" style="display:none;"></div>
                                  <div class="alert alert-danger" role="alert" style="display:none;"></div>
                               </div>
