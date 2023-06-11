@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../model/RegistrationModel.php';
+include '../model/AdminModel.php';
 
 
 if (isset($_POST['action']) && $_POST['action'] == 'login') {

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../model/RegistrationModel.php';
+include '../model/AdminModel.php';
 
 
 
@@ -54,7 +54,3 @@ if (isset($_POST['action']) && $_POST['action'] == 'registration') {
 
    echo json_encode($returnArr);
 }
-//stugumner@ controller
-// emali uniqid()
-
-//&& preg_match_all($userNameVerify, $username) && preg_match_all($emailVerify, $email) && preg_match_all($passwordVerify, $password)
