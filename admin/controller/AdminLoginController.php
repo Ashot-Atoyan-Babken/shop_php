@@ -9,6 +9,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
    if ($username != '' && $password != '') {
       $check_admin_login = $Admin->check_admin_login($username, sha1($password));
       if ($check_admin_login > 0) {
+         $_SESSION['username'] = $username;
          $returnArr['action'] = 1;
          $returnArr['message'] = 'you are logged in';
       } else {
@@ -19,5 +20,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
       $returnArr['action'] = 0;
       $returnArr['message'] = 'please fill all fields';
    }
+
    echo json_encode($returnArr);
 }

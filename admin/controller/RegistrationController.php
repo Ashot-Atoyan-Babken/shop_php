@@ -5,7 +5,6 @@ include '../model/AdminModel.php';
 
 
 $userNameVerify = "/^[a-z\d_]{5,20}$/i";
-$emailVerify = "/\w+[\@]\w+[\.]\w+/";
 $passwordVerify = "/^[a-z\d_]{5,20}$/i";
 
 if (isset($_POST['action']) && $_POST['action'] == 'registration') {
@@ -20,7 +19,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'registration') {
       $username != '' && $email != '' && $password != ''
       && $password == $comf
       && preg_match_all($userNameVerify, $username)
-      && preg_match_all($emailVerify, $email)
       && preg_match_all($passwordVerify, $password)
    ) {
       $check_email = $Admin->check_email($email);

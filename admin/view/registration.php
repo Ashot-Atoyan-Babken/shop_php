@@ -8,7 +8,6 @@
    <link rel="stylesheet" href="../asset/css/style.css">
    <link rel="shortcut icon" href="../asset/img/svg/registration.svg" type="image/x-icon">
    <title>Registration</title>
-
 </head>
 
 <body style="background-color:#1f2029">
