@@ -107,7 +107,7 @@ $(function () {
    $('.category').on('click', function () {
       let category = $('#category').val();
       $.ajax({
-         url: '../controller/CategoryController.php',
+         url: 'controller/CategoryController.php',
          method: 'post',
          data: {
             category,

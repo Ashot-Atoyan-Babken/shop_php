@@ -34,5 +34,15 @@ class User
          return $result = '0';
       }
    }
+   public function check_user_login($username, $password)
+   {
+      $query = "SELECT 'USERNAME','PASSWORD' FROM `user` WHERE `username`='$username' AND `password` ='$password'";
+      $res = mysqli_query($this->conn, $query);
+      if (mysqli_num_rows($res) > 0) {
+         return $result = '1';
+      } else {
+         return $result = '0';
+      }
+   }
 }
 $UserModel = new User();

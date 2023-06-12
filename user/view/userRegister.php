@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +9,7 @@ session_start();
    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
    <link rel="stylesheet" href="../asset/css/style.css">
-   <link rel="shortcut icon" href="../asset/img/svg/registration.svg" type="image/x-icon">
+   <link rel="shortcut icon" href="../asset/img/svg/user_reg.svg" type="image/x-icon">
    <title>User Registration</title>
 </head>
 

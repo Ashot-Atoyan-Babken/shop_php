@@ -17,7 +17,7 @@ $id = $_GET['id'];
    <?php
    include 'header.php';
    ?>
-   <div class="mx-auto mt-5 w-25">
+   <div class="mx-auto mt-5 w-25 p-3" style="border:1px solid #000; border-radius: 15px; box-shadow: 0px 0px 33px 0px rgba(0,0,0,1)">
       <div class="row ">
          <div class="col">
             <label for="Product_Name" class="form-label">Name</label>
@@ -41,7 +41,7 @@ $id = $_GET['id'];
          <div class="alert alert-danger" role="alert" id="img_alert" style="display:none;"></div>
       </div>
    </div>
-   <div class="mb-3 mx-auto w-25 ">
+   <div class="mb-3 mx-auto w-25 text-center">
       <button type="submit" class="btn btn-success mt-3  mx-auto add_prod">ADD PRODUCT</button>
    </div>
    <div class="alert alert-danger" role="alert" id="email_not_verify" style="display:none;"></div>
@@ -72,7 +72,7 @@ $id = $_GET['id'];
                   <td class="product_status text-center"><?= $product['product_status'] ?></td>
                   <td class="text-center">
                      <button type="button" class="btn btn-primary edit_prod" data-id="<?= $product['id'] ?>" data-toggle="modal" data-target="#Modal">
-                        UPDATE
+                        EDIT
                      </button>
                      <button type="button" class="btn btn-danger delete_prod" data-id="<?= $product['id'] ?>">DELETE</button>
                   </td>
