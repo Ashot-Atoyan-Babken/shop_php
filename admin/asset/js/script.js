@@ -201,6 +201,7 @@ $(function () {
       let prod_price = $('#Product_Price').val();
       let prod_description = $('#Description').val();
       let prod_image = $('input[type=file]').val().replace(/.*(\/|\\)/, '');
+      var id = Number(jQuery.param(window.location.search)[jQuery.param(window.location.search).length - 1]);
       $.ajax({
          url: '../controller/ProductController.php',
          method: 'post',
@@ -210,6 +211,7 @@ $(function () {
             prod_price,
             prod_description,
             prod_image,
+            id,
             action: 'add_prod',
          },
          success: function (data) {
@@ -242,6 +244,13 @@ $(function () {
                setTimeout(() => {
                   location.reload()
                }, 2500);
+            } else if (data['action'] == 6) {
+               $('#img_alert').html(data['message'])
+               $('#img_alert').fadeIn()
+               $('#img_alert').fadeOut(2000)
+               setTimeout(() => {
+                  location.reload()
+               }, 2500);
             } else if (data['action'] == 0) {
                $('#email_not_verify').html(data['message'])
                $('#email_not_verify').fadeIn()
@@ -255,44 +264,63 @@ $(function () {
                $('#email_verify').fadeOut(2000)
                setTimeout(() => {
                   location.reload()
-               }, 2500);
+               }, 1000);
             }
          }
       })
    })
-   $('.update_prod').on('click', function () {
-      let product_name = $('#new_Product_Name').val();
-      let product_price = $('#new_Product_Price').val();
-      let product_content = $('#new_Description').val();
-      let prod_image = $('#new_formFile').val().replace(/.*(\/|\\)/, '');
-      let prod_option = $('#select option:selected').html();
+   $('.edit_prod').on('click', function () {
       let id = $(this).data('id');
       $.ajax({
          url: '../controller/ProductController.php',
          method: 'post',
          dataType: 'json',
          data: {
-            product_name,
-            product_price,
-            product_content,
-            prod_image,
-            prod_option,
             id,
-            action: 'update_prod'
+            action: 'edit_prod'
          },
          success: function (data) {
-            console.log(data);
+            $.each(data, function (index, value) {
+               $('.update_product').data('id', id);
+               $('#ModalLabel').html(value['product_name']);
+               $('#new_Description').html(value['product_content']);
+               $('#new_Product_Name').val(value['product_name']);
+               $('#new_Product_Price').val(value['product_price']);
+            })
+         }
+      })
+
+   })
+   $('.update_product').on('click', function () {
+      let id = $(this).data('id');
+      let prod_name = $('#new_Product_Name').val();
+      let prod_price = $('#new_Product_Price').val();
+      let prod_description = $('#new_Description').val();
+      let prod_image = $('#new_formFile').val().replace(/.*(\/|\\)/, '');
+      $.ajax({
+         url: '../controller/ProductController.php',
+         method: 'post',
+         dataType: 'json',
+         data: {
+            prod_name,
+            prod_price,
+            prod_description,
+            prod_image,
+            id,
+            action: 'update_product'
+         },
+         success: function (data) {
             if (data['action'] == '1') {
-               $('.alert-success').html(data['message']);
-               $('.alert-success').fadeIn();
-               $('.alert-success').fadeOut(2500);
+               $('#up_suc').html(data['message']);
+               $('#up_suc').fadeIn();
+               $('#up_suc').fadeOut(2500);
                setTimeout(function () {
                   location.reload();
                }, 1000);
             } else {
-               $('.alert-danger').html(data['message']);
-               $('.alert-danger').fadeIn();
-               $('.alert-danger').fadeOut(2500);
+               $('#up_fa').html(data['message']);
+               $('#up_fa').fadeIn();
+               $('#up_fa').fadeOut(2500);
                setTimeout(function () {
                   location.reload();
                }, 1000);
@@ -331,4 +359,5 @@ $(function () {
       })
 
    })
+
 })

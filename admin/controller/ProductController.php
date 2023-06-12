@@ -7,8 +7,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_prod') {
    $prod_price = $_POST['prod_price'];
    $prod_desc = $_POST['prod_description'];
    $prod_img = $_POST['prod_image'];
+   $id = $_POST['id'];
    if ($prod_name != '' && $prod_price != '' && $prod_desc != '' && $prod_img != '') {
-      $create_product = $Admin->create_product($prod_img, $prod_name, $prod_price, $prod_desc);
+      $create_product = $Admin->create_product($prod_img, $prod_name, $prod_price, $prod_desc, $id);
       if ($create_product > 0) {
          $returnArr['action'] = 0;
          $returnArr['message'] = 'Product Not Added';
@@ -35,15 +36,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_prod') {
    echo json_encode($returnArr);
 }
 
-
-if (isset($_POST['action']) && $_POST['action'] == 'update_prod') {
+if (isset($_POST['action']) && $_POST['action'] == 'update_product') {
    $id = $_POST['id'];
    $prod_name = $_POST['prod_name'];
    $prod_price = $_POST['prod_price'];
-   $prod_desc = $_POST['product_content'];
-   $prod_img = $_POST['prod_image'];
-   $prod_option = $_POST['prod_option'];
-   $update_product = $Admin->update_product($prod_img, $prod_name, $prod_price, $prod_desc, $prod_option, $id);
+   $prod_desc = $_POST['prod_description'];
+   $prod_image = $_POST['prod_image'];
+   $update_product = $Admin->update_product($prod_image, $prod_name, $prod_price, $prod_desc, $id);
    if ($update_product) {
       $returnArr['action'] = 1;
       $returnArr['message'] = 'Product Updated Successfully';
@@ -53,7 +52,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'update_prod') {
    }
    echo json_encode($returnArr);
 }
-
 
 if (isset($_POST['action']) && $_POST['action'] == 'delete_prod') {
    $id = $_POST['id'];
@@ -66,4 +64,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'delete_prod') {
       $returnArr['message'] = 'Product  Not Deleted';
    }
    echo json_encode($returnArr);
+}
+
+if (isset($_POST['action']) && $_POST['action'] == 'edit_prod') {
+   $id = $_POST['id'];
+   $edit_prod = $Admin->edit_prod($id);
+   echo json_encode($edit_prod);
 }

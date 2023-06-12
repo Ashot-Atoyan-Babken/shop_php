@@ -57,7 +57,7 @@ include 'model/AdminModel.php';
                <tr>
                   <td contenteditable class="category_name text-center"><?= $category['title'] ?></td>
                   <td class="text-center">
-                     <a href="view/product.php" class="btn btn-info open_prod" target="_blank" data-id="<?= $category['id'] ?>">OPEN</a>
+                     <a href="view/product.php?id=<?= $category['id'] ?>" class="btn btn-info open_prod" target="_blank" data-id="<?= $category['id'] ?>">OPEN</a>
                      <button class="btn btn-warning update_cat" data-id="<?= $category['id'] ?>">UPDATE</button>
                      <button class="btn btn-danger delete_cat" data-id="<?= $category['id'] ?>">DELETE</button>
                   </td>
