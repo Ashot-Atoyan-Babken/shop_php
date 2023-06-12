@@ -7,7 +7,7 @@
    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
    <link rel="stylesheet" href="../asset/css/style.css">
    <link rel="shortcut icon" href="../asset/img/svg/registration.svg" type="image/x-icon">
-   <title>Registration</title>
+   <title>Admin Registration</title>
 </head>
 
 <body style="background-color:#1f2029">
