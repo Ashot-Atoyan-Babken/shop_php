@@ -8,64 +8,58 @@ session_start();
    <meta charset="UTF-8">
    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
-   <link rel="stylesheet" href="../asset/css/style.css">
+   <link rel="stylesheet" href="../asset/css/registration.css">
+
    <link rel="shortcut icon" href="../asset/img/svg/user_reg.svg" type="image/x-icon">
    <title>User Registration</title>
 </head>
 
 <body style="background-color:#1f2029">
-   <div class="section">
-      <div class="container">
-         <div class="row full-height justify-content-center">
-            <div class="col-12 text-center align-self-center py-5">
-               <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                  <div class="card-3d-wrap mx-auto">
-                     <div class="card-3d-wrapper">
-                        <div class="card-front">
-                           <div class="center-wrap">
-                              <div class="section text-center">
-                                 <h4 class="mb-4 pb-3 text-warning text-uppercase">Sign Up</h4>
-                                 <form action="../controller/RegisterController.php" method="post">
-                                    <div class="form-group">
-                                       <input type="text" name="username" class="form-style" placeholder="Your Full Name" id="username" autocomplete="off">
-                                       <i class="input-icon uil uil-user"></i>
-                                       <div class="alert alert-danger" role="alert" id="username_alert" style="display:none;"></div>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                       <input type="email" name="your_email" class="form-style" placeholder="Your Email" id="your_email" autocomplete="off">
-                                       <i class="input-icon uil uil-at"></i>
-                                       <div class="alert alert-danger" role="alert" id="email_alert" style="display:none;">
-                                       </div>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                       <input type="password" name="password" class="form-style" placeholder="Your Password" id="password" autocomplete="off">
-                                       <i class="input-icon uil uil-lock-alt"></i>
-                                       <div class="alert alert-danger" role="alert" id="password_alert" style="display:none;"></div>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                       <input type="password" name="comfirm_password" class="form-style" placeholder="Comfirm Password" id="comfirm_password" autocomplete="off">
-                                       <i class="input-icon uil uil-lock-alt"></i>
-                                       <div class="alert alert-danger" role="alert" id="comf_pass_alert" style="display:none;"></div>
-                                    </div>
-                                    <input class="btn mt-4 btn-dark register" type="submit" value="Register" name="register">
-                                 </form>
-                                 <?php
-                                 if (isset($_SESSION['error'])) { ?>
-                                    <div class="alert alert-danger" role="alert" id="email_not_verify">
-                                       <?= $_SESSION['error'] ?></div>
-                                 <?php
-                                    unset($_SESSION['error']);
-                                 } ?>
-                                 <div class="alert alert-success mx-auto" role="alert" id="email_verify" style="display:none;"></div>
-                                 <p class="text-start text-warning text-uppercase fs-8 pt-4">Already have an account?
-                                    <a href="../view/userLogin.php">Log in</a>
-                                 </p>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+   <div class="main">
+      <div class="wrapper">
+         <div class="content">
+            <div class="header">
+               <h1>Регестрация</h1>
+               <a href="userLogin.php">
+                  <h2>Вход</h2>
+               </a>
+            </div>
+            <form class="input" action="../controller/RegisterController.php" method="post">
+               <input type="text" name="username" class="form-style" placeholder="Your Full Name" id="username" autocomplete="off">
+               <input type="email" name="your_email" class="form-style" placeholder="Your Email" id="your_email" autocomplete="off">
+               <input type="password" name="password" class="form-style" placeholder="Your Password" id="password" autocomplete="off">
+               <input type="password" name="comfirm_password" class="form-style" placeholder="Comfirm Password" id="comfirm_password" autocomplete="off">
+               <input class="btn mt-4 btn-dark register" type="submit" value="Зарегестрироваться" name="register">
+            </form>
+            <?php
+            if (isset($_SESSION['error'])) { ?>
+               <div class="alert alert-danger" role="alert" id="email_not_verify">
+                  <?= $_SESSION['error'] ?></div>
+            <?php
+               unset($_SESSION['error']);
+            } ?>
+            <p class="p"><input type="checkbox" name="" id="checkbox">
+               Я соглашаюсь со следующими установленными правилами: Политика использования файлов cookie
+               WARPLAY.CLOUD, Пользовательское соглашение WARPLAY.CLOUD, Лицензионное соглашение MY.GAMES с конечным
+               пользователем в отношении Игр, Лицензионное соглашение с конечным Пользователем для WARPLAY.CLOUD
+               Игрового центра, Политика конфиденциальности портала WARPLAY.CLOUD, Политика конфиденциальности
+               WARPLAY.CLOUD для детей</p>
+            <div class="sign-in">
+               <img src="../asset/img/general page/svg/Line 91.png" alt="Line 91.png">
+               <h3>Войти через</h3>
+               <img src="../asset/img/general page/svg/Line 91.png" alt="Line 91.png">
+            </div>
+            <div class="images__level1">
+               <img src="../asset/img/general page/svg/Mail_ru.svg" alt="">
+               <img src="../asset/img/general page/svg/VK.svg" alt="">
+               <img src="../asset/img/general page/svg/OK.svg" alt="">
+               <img src="../asset/img/general page/svg/Facebook.svg" alt="">
+               <img src="../asset/img/general page/svg/Google.svg" alt="">
+            </div>
+            <div class="images__level2">
+               <img src="../asset/img/general page/svg/Twitch.svg" alt="">
+               <img src="../asset/img/general page/svg/Twitter.svg" alt="">
+               <img src="../asset/img/general page/svg/Apple.svg" alt="">
             </div>
          </div>
       </div>

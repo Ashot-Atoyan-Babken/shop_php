@@ -44,5 +44,19 @@ class User
          return $result = '0';
       }
    }
+   public function show_all_category()
+   {
+      $query = "SELECT * FROM `categories` WHERE `category_status`='ACTIVE'";
+      $res = mysqli_query($this->conn, $query);
+      $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
+      return $result;
+   }
+   public function show_all_prod($catId)
+   {
+      $query = "SELECT * FROM `product` WHERE `product_status`='ACTIVE' AND `category_id`='$catId'";
+      $res = mysqli_query($this->conn, $query);
+      $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
+      return $result;
+   }
 }
 $UserModel = new User();

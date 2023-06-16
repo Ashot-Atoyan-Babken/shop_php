@@ -1,0 +1,143 @@
+body {
+   background: #141C24;
+}
+
+.wrapper {
+   height: 100%;
+   width: 500px;
+   margin: 12% auto 0;
+
+
+}
+
+.alert-danger {
+   background-color: #f2dede;
+   border-color: #ebccd1;
+   color: #a94442;
+}
+
+.content {
+   text-align: center;
+}
+
+.header {
+   display: flex;
+   align-items: center;
+}
+
+.header h1 {
+   font-weight: 400;
+   font-size: 48px;
+   line-height: 48px;
+   /* identical to box height */
+   margin-right: 41px;
+   margin-left: 60px;
+
+   color: #FFFFFF;
+}
+
+.header h2 {
+   font-weight: 400;
+   font-size: 44px;
+   line-height: 48px;
+   /* identical to box height */
+
+
+   color: rgba(255, 255, 255, 0.5);
+}
+
+.input input {
+   padding-left: 15px;
+   margin-bottom: 15px;
+   width: 390px;
+   height: 75px;
+   border-radius: 5px;
+}
+
+.input {
+   margin: 0 auto;
+   margin-top: 32px;
+   margin-bottom: 30px;
+}
+
+span {
+   background: url("../img/sqr.png");
+   background-repeat: no-repeat;
+   background-position: center center;
+   display: block;
+   text-align: center;
+   height: 61px;
+   width: 251px;
+   padding-top: 30px;
+   font-weight: 400;
+   font-size: 24px;
+   line-height: 24px;
+   /* identical to box height */
+
+
+   color: #000000;
+}
+
+.p {
+   font-family: 'Roboto';
+   font-style: normal;
+   font-weight: 200;
+   font-size: 12px;
+   line-height: 14px;
+   text-align: left;
+   color: #FFFFFF;
+}
+
+#checkbox {
+   margin-right: 15px;
+}
+
+.sign-in {
+   margin-top: 42px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.sign-in img {
+   margin: 0 5px;
+}
+
+.sign-in h3 {
+   font-family: 'Roboto';
+   font-style: normal;
+   font-weight: 200;
+   font-size: 12px;
+   line-height: 14px;
+   /* identical to box height */
+
+
+   color: #FFFFFF;
+}
+
+.images__level1 {
+   margin: 35px 0px 13px 0px;
+}
+
+.images__level1 img,
+.images__level2 img {
+   margin-right: 20px;
+}
+
+.remember {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.remember p {
+   font-family: 'Roboto';
+   font-style: normal;
+   font-weight: 200;
+   font-size: 12px;
+   line-height: 14px;
+   /* identical to box height */
+   margin-right: 38px;
+
+   color: #FFFFFF;
+}
