@@ -43,8 +43,8 @@ h1:after {
 }
 
 .error-404-wrap {
-   width: 100vw;
-   height: 100vh;
+   width: 50vw;
+   height: 50vh;
    display: flex;
    justify-content: center;
    align-items: center;

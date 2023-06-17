@@ -58,5 +58,12 @@ class User
       $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
       return $result;
    }
+   public function getall($id)
+   {
+      $query = "SELECT * FROM `product` WHERE  `id`='$id'";
+      $res = mysqli_query($this->conn, $query);
+      $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
+      return $result;
+   }
 }
 $UserModel = new User();

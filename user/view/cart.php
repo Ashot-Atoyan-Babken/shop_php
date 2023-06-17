@@ -2,13 +2,7 @@
 session_start();
 include 'header.php';
 include '../model/UserModel.php';
-
-$show_all_prod = $UserModel->show_all_prod($catId);
-if (isset($_GET['catId'])) {
-   $searchQuery = $_GET['catId'];
-}
 ?>
-
 
 
 <!DOCTYPE html>
@@ -23,7 +17,7 @@ if (isset($_GET['catId'])) {
    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css'>
 
-   <title>Games</title>
+   <title>Корзина</title>
 </head>
 
 <body style="background: #141C24;">
@@ -92,55 +86,31 @@ if (isset($_GET['catId'])) {
                      Контакты
                   </p>
                </div>
-               <div class="timeline__step">
-                  <svg class="timeline__icon timeline__icon--default">
-                     <use href="#icon-customers" />
-                  </svg>
-                  <svg class="timeline__icon timeline__icon--active">
-                     <use href="#icon-customers" />
-                  </svg>
-                  <p class="timeline__step-title">
-                     <?php
-                     if (isset($_SESSION['prodIds'])) { ?>
-                     <a href="../controller/CartController.php?arr=<?= $_SESSION['strProdIds'] ?>"><img
-                           src="../asset/img/svg/free_icon_1.svg" alt="cart"></a>
-
-                  <p class="hello"><?= count($_SESSION['prodIds']) ?></p>
-                  <?php
-                     }
-               ?>
-                  </p>
-               </div>
             </div>
          </div>
       </div>
    </div>
-   <div class="body">
-      <?php
-      if (count($show_all_prod) > 0) {
-         foreach ($show_all_prod as $prod) { ?>
-      <div class="card mr-3 mt-3 cont" style="width: 18rem;">
-         <img class="card-img-top" src="../../admin/asset/img/products/<?= $prod['product_image'] ?>"
-            alt="<?= $prod['product_image'] ?>">
-         <div class="card-body">
-            <h5 class="card-title text-center"><?= $prod['product_name'] ?></h5>
-            <p class="card-text overflow-auto"><?= $prod['product_content'] ?></p>
-            <h3><?= $prod['product_price'] ?> USD</h3>
-            <a href="../controller/CountController.php?prodId=<?= $prod['id'] ?>&catId=<?= $searchQuery ?>">
-               <button data-val="<?= $username ?>" class="btn btn-info add" onclick="add()" name="add">ADD To
-                  Cart</button></a>
-         </div>
+   <div class="card mx-auto" style="width: 18rem;">
+      <div class="card-body">
+         <h5 class="card-title">Итого</h5>
+         <a href="#" class="card-link btn btn-success">Оплатить</a>
+         <p>Соглашаюсь c правилами пользования торговой площадки и возврата</p>
       </div>
-      <?php
-         }   ?>
-      <?php
-      } else { ?>
-      <span class="error-404-wrap">
-         <h1 data-t="404" class="h1">пока что ЗДЕСЬ НИЧЕГО НЕТ <br> Простите</h1>
-      </span>
-      <?php  } ?>
    </div>
+   <?php
+   if (isset($_SESSION['myArray'])) {
+      $ids = $_SESSION['myArray'];
+      foreach ($ids as $value => $id) {
+         $getAll = $UserModel->getall($id);
+         foreach ($getAll as $item) { ?>
+   <ul style="color:white;">
+      <li><?= $item['product_name'] ?></li>
+   </ul>
+   <?php   }
+      }
+   }
 
+   ?>
 </body>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
