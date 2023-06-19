@@ -58,9 +58,37 @@ class User
       $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
       return $result;
    }
-   public function getall($id)
+
+   public function add_carts($username, $prodId)
    {
-      $query = "SELECT * FROM `product` WHERE  `id`='$id'";
+      $query = "INSERT INTO `carts` VALUES (NULL,'$prodId', DEFAULT ,'$username')";
+      $res = mysqli_query($this->conn, $query);
+   }
+   public function check_cart($username, $prodId)
+   {
+      $query = "SELECT * FROM `carts` WHERE `username` = '$username' AND `product_id` = '$prodId'";
+      $res = mysqli_query($this->conn, $query);
+      if (mysqli_num_rows($res) > 0) {
+         return $result = 1;
+      } else {
+         return $result = 0;
+      }
+   }
+   public function cart_update($username, $prodId, $quantity)
+   {
+      $query = "UPDATE `carts` SET `quantity`= quantity + $quantity WHERE `product_id`='$prodId' AND `username`='$username'";
+      $res = mysqli_query($this->conn, $query);
+      return $res;
+   }
+   public function get_all_products_in_cart()
+   {
+      $query = "SELECT * FROM `carts`";
+      $res = mysqli_query($this->conn, $query);
+      return $res;
+   }
+   public function get_all_products($prodId)
+   {
+      $query = "SELECT * FROM `product` WHERE `id`='$prodId'";
       $res = mysqli_query($this->conn, $query);
       $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
       return $result;

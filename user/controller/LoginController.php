@@ -11,6 +11,7 @@ if (isset($_POST['login'])) {
          header('location:../view/userLogin.php');
          $_SESSION['action'] = 'Failed';
       } else {
+         $_SESSION['username'] = $username;
          header('location:../index.php');
       }
    } else {

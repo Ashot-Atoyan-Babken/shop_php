@@ -1,13 +1,33 @@
 <?php
 session_start();
-if (!isset($_SESSION['prodId'])) {
-   $_SESSION['prodId'] = array();
-}
+include '../model/UserModel.php';
 
-if (isset($_GET['prodId']) && is_numeric($_GET['prodId'])) {
-   $prodId = $_GET['prodId'];
-   $catId = $_GET['catId'];
-   $_SESSION['prodIds'][] = $prodId;
+if (isset($_POST['action']) && $_POST['action'] == 'add') {
+
+   $username = $_POST['username'];
+   $prodId = $_POST['prodId'];
+
+   $check_cart = $UserModel->check_cart($username, $prodId);
+
+   if ($check_cart > 0) {
+      $quantity = 1;
+      $cart_update = $UserModel->cart_update($username, $prodId, $quantity);
+      if ($cart_update) {
+         $returnArr['action'] = 1;
+         $returnArr['message'] = 'updated successful';
+      } else {
+         $returnArr['action'] = 0;
+         $returnArr['message'] = 'updated failed';
+      }
+   } else {
+      $add_carts = $UserModel->add_carts($username, $prodId);
+      if ($add_carts) {
+         $returnArr['action'] = 0;
+         $returnArr['message'] = 'created failed';
+      } else {
+         $returnArr['action'] = 1;
+         $returnArr['message'] = 'created successful';
+      }
+   }
+   echo json_encode($returnArr);
 }
-$_SESSION['strProdIds']  = implode(' ', $_SESSION['prodIds']);
-header("location:../view/userProduct.php?catId=$catId");

@@ -2,11 +2,8 @@
 session_start();
 include 'header.php';
 include '../model/UserModel.php';
-
 $show_all_prod = $UserModel->show_all_prod($catId);
-if (isset($_GET['catId'])) {
-   $searchQuery = $_GET['catId'];
-}
+
 ?>
 
 
@@ -22,6 +19,7 @@ if (isset($_GET['catId'])) {
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css'>
+   <link rel="shortcut icon" href="../asset/img/svg/games.svg" type="image/x-icon">
 
    <title>Games</title>
 </head>
@@ -100,15 +98,8 @@ if (isset($_GET['catId'])) {
                      <use href="#icon-customers" />
                   </svg>
                   <p class="timeline__step-title">
-                     <?php
-                     if (isset($_SESSION['prodIds'])) { ?>
-                     <a href="../controller/CartController.php?arr=<?= $_SESSION['strProdIds'] ?>"><img
-                           src="../asset/img/svg/free_icon_1.svg" alt="cart"></a>
-
-                  <p class="hello"><?= count($_SESSION['prodIds']) ?></p>
-                  <?php
-                     }
-               ?>
+                     <a href="../controller/CartController.php"><img src="../asset/img/svg/free_icon_1.svg"
+                           alt="cart"></a>
                   </p>
                </div>
             </div>
@@ -126,9 +117,8 @@ if (isset($_GET['catId'])) {
             <h5 class="card-title text-center"><?= $prod['product_name'] ?></h5>
             <p class="card-text overflow-auto"><?= $prod['product_content'] ?></p>
             <h3><?= $prod['product_price'] ?> USD</h3>
-            <a href="../controller/CountController.php?prodId=<?= $prod['id'] ?>&catId=<?= $searchQuery ?>">
-               <button data-val="<?= $username ?>" class="btn btn-info add" onclick="add()" name="add">ADD To
-                  Cart</button></a>
+            <button data-val="<?= $username ?>" data-id="<?= $prod['id'] ?>" type="submit" class="btn btn-info add"
+               name="add">ADD To Cart</button>
          </div>
       </div>
       <?php
@@ -142,14 +132,11 @@ if (isset($_GET['catId'])) {
    </div>
 
 </body>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-   integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-   integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-   integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
-</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="../asset/css/404.css">
 <script src="../asset/js/script.js"></script>
 

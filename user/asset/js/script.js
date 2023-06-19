@@ -143,3 +143,37 @@ function getStepActiveMarkerPosX(currentStep) {
 function getElementWidth(elem) {
    return elem.clientWidth;
 }
+
+
+$(function () {
+   $('.add').on('click', function () {
+      let username = $(this).data('val');
+      let prodId = $(this).data('id');
+      $.ajax({
+         url: '../controller/CountController.php',
+         method: 'post',
+         dataType: 'json',
+         data: {
+            username,
+            prodId,
+            action: 'add',
+         },
+         success: function (data) {
+            console.log(data);
+         }
+      })
+   })
+   $('.create-order').on('click', function () {
+      $.ajax({
+         url: '../controller/OrderController.php',
+         method: 'post',
+         datatype: 'json',
+         data: {
+            action: 'create-order',
+         },
+         success: function () {
+
+         }
+      })
+   })
+})
