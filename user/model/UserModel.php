@@ -88,7 +88,7 @@ class User
    }
    public function get_all_products($prodId)
    {
-      $query = "SELECT * FROM `product` WHERE `id`='$prodId'";
+      $query = "SELECT * FROM `product` WHERE `product_id`='$prodId'";
       $res = mysqli_query($this->conn, $query);
       $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
       return $result;
@@ -111,9 +111,9 @@ class User
       $res = mysqli_query($this->conn, $query);
       return $res;
    }
-   public function create_order($id, $value)
+   public function create_order($id, $value, $username)
    {
-      $query = "INSERT INTO `orders` VALUES (NULL,'$id','$value',DEFAULT)";
+      $query = "INSERT INTO `orders` VALUES (NULL,'$id','$value','$username', DEFAULT, DEFAULT)";
       $res = mysqli_query($this->conn, $query);
    }
    public function delete_carts_item($id)
@@ -121,9 +121,9 @@ class User
       $query = "DELETE FROM `carts` WHERE `product_id` = '$id'";
       $res = mysqli_query($this->conn, $query);
    }
-   public function get_all_products_in_order()
+   public function get_all_products_in_order_on_false()
    {
-      $query = "SELECT * FROM `orders`";
+      $query = "SELECT * FROM `orders` WHERE `com_or_pend` = 'False'";
       $res = mysqli_query($this->conn, $query);
       $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
       return $result;
@@ -132,6 +132,19 @@ class User
    {
       $query = "DELETE FROM `orders` WHERE `order_product_id` = $id";
       $res = mysqli_query($this->conn, $query);
+   }
+   public function send_order($username)
+   {
+      $query = "UPDATE `orders` SET `com_or_pend` = 'True' WHERE `username`='$username' AND `com_or_pend` = 'False' AND `order_status` = 'Active'";
+      $res = mysqli_query($this->conn, $query);
+      return $res;
+   }
+   public function get_all_products_in_order_on_true()
+   {
+      $query = "SELECT * FROM `orders` WHERE `com_or_pend` = 'True'";
+      $res = mysqli_query($this->conn, $query);
+      $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
+      return $result;
    }
 }
 $UserModel = new User();

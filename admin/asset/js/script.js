@@ -359,5 +359,19 @@ $(function () {
       })
 
    })
+   $('.confirm').on('click', function () {
+      let prod_id = $(this).data('id');
+      $.ajax({
+         url: '../controller/OrderController.php',
+         type: "POST",
+         data: {
+            prod_id,
+            action: 'confirm',
+         },
+         success: function () {
+            location.reload();
+         }
+      })
+   })
 
 })

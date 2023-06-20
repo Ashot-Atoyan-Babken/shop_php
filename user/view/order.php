@@ -2,7 +2,9 @@
 session_start();
 include 'header.php';
 include '../model/UserModel.php';
-$get_all_products_in_order = $UserModel->get_all_products_in_order();
+$get_all_products_in_order = $UserModel->get_all_products_in_order_on_false();
+$get_all_products_in_order_on_true = $UserModel->get_all_products_in_order_on_true();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +20,7 @@ $get_all_products_in_order = $UserModel->get_all_products_in_order();
    <link rel="shortcut icon" href="../asset/img/svg/cart.svg" type="image/x-icon">
    <link rel="stylesheet" href="../asset/css/404.css">
 
-   <title>Корзина</title>
+   <title>заказы</title>
 </head>
 
 <body style="background: #141C24;">
@@ -87,76 +89,121 @@ $get_all_products_in_order = $UserModel->get_all_products_in_order();
                      Контакты
                   </p>
                </div>
+               <div class="timeline__step">
+                  <svg class="timeline__icon timeline__icon--default">
+                     <use href="#icon-customers" />
+                  </svg>
+                  <svg class="timeline__icon timeline__icon--active">
+                     <use href="#icon-customers" />
+                  </svg>
+                  <p class="timeline__step-title">
+                     <a href="../controller/LogOutController.php"><img src="../asset/img/svg/logout.svg" alt="logout"></a>
+                  </p>
+               </div>
             </div>
          </div>
       </div>
    </div>
    <p class="text-warning h1 text-center text-uppercase mb-5">новые заказы</p>
-   <table class="table table-hover mx-auto mt-5" style="width: 80%;border:1px solid #000">
-      <thead class="thead-dark">
-         <tr>
-            <th class="text-center">Картинка</th>
-            <th class="text-center">Имя</th>
-            <th class="text-center">Цена</th>
-            <th class="text-center">Количество</th>
-            <th class="text-center">Общая сумма</th>
-            <th class="text-center">Действие</th>
-         </tr>
-      </thead>
-      <tbody>
-         <?php
-         $total = 0;
-         if (count($get_all_products_in_order) > 0) {
+   <?php
+   $total = 0;
+   if (count($get_all_products_in_order) > 0) { ?>
+      <table class="table table-hover mx-auto mt-5" style="width: 80%;border:1px solid #000">
+         <thead class="thead-dark">
+            <tr>
+               <th class="text-center">Картинка</th>
+               <th class="text-center">Имя</th>
+               <th class="text-center">Цена</th>
+               <th class="text-center">Количество</th>
+               <th class="text-center">Общая сумма</th>
+               <th class="text-center">Действие</th>
+            </tr>
+         </thead>
+         <tbody>
+            <?php
             foreach ($get_all_products_in_order as $order) {
                $get_all_products = $UserModel->get_all_products($order['order_product_id']);
                foreach ($get_all_products as $product) { ?>
-         <tr class="text-center" style="color: white;">
-            <td><img src="../../admin/asset/img/products/<?= $product['product_image'] ?>"
-                  alt="<?= $product['product_image'] ?>" style="width: 150px; height: 150px"></td>
-            <td><?= $product['product_name'] ?></td>
-            <td><?= $product['product_price'] ?> USD</td>
-            <td><?= $order['quantity'] ?></td>
-            <td><?= $product['product_price'] * $order['quantity'] ?></td>
-            <td><button class="btn btn-danger remove" data-id="<?= $product['id'] ?>">Удалить</button></td>
-         </tr>
-         <?php
+                  <tr class="text-center" style="color: white;">
+                     <td><img src="../../admin/asset/img/products/<?= $product['product_image'] ?>" alt="<?= $product['product_image'] ?>" style="width: 150px; height: 150px"></td>
+                     <td><?= $product['product_name'] ?></td>
+                     <td><?= $product['product_price'] ?> USD</td>
+                     <td><?= $order['quantity'] ?></td>
+                     <td><?= $product['product_price'] * $order['quantity'] ?></td>
+                     <td><button class="btn btn-danger remove" data-id="<?= $product['product_id'] ?>">Удалить</button></td>
+                  </tr>
+            <?php
                   $total += $product['product_price'] * $order['quantity'];
                }
-            }
-         }  ?>
+            } ?>
 
-      </tbody>
-   </table>
-   <div class="d-flex justify-content-center align-items-center">
-      <button class="btn btn-success mt-5 mb-5" style="margin-right:63%">Отправить заказ</button>
-      <p class="text-warning h6 text-uppercase mt-5 mb-5">Общая сумма <?= $total ?> USD</p>
-   </div>
+
+         </tbody>
+      </table>
+      <div class="d-flex justify-content-center align-items-center">
+         <button class="btn btn-success mt-5 mb-5 send_order" style="margin-right:63%" data-val="<?= $username ?>">Отправить
+            заказ</button>
+         <p class="text-warning h6 text-uppercase mt-5 mb-5">Общая сумма <?= $total ?> USD</p>
+      </div>
+   <?php  }  ?>
    <p class="text-warning h1 text-center text-uppercase mb-5">отправленные заказы</p>
-   <table class="table table-hover mx-auto mt-5" style="width: 80%;border:1px solid #000">
-      <thead class="thead-dark">
-         <tr>
-            <th class="text-center">Картинка</th>
-            <th class="text-center">Имя</th>
-            <th class="text-center">Цена</th>
-            <th class="text-center">Количество</th>
-            <th class="text-center">Общая сумма</th>
-            <th class="text-center">Статус</th>
-            <th class="text-center">Действие</th>
-         </tr>
-      </thead>
-   </table>
+   <?php
+   if (count($get_all_products_in_order_on_true) > 0) { ?>
+      <table class="table table-hover mx-auto mt-5" style="width: 80%;border:1px solid #000">
+         <thead class="thead-dark">
+            <tr>
+               <th class="text-center">Картинка</th>
+               <th class="text-center">Имя</th>
+               <th class="text-center">Цена</th>
+               <th class="text-center">Количество</th>
+               <th class="text-center">Общая сумма</th>
+               <th class="text-center">Статус</th>
+               <th class="text-center">Действие</th>
+            </tr>
+         </thead>
+         <tbody>
+            <?php
+            foreach ($get_all_products_in_order_on_true as $order_true) {
+               $get_all_products = $UserModel->get_all_products($order_true['order_product_id']);
+               foreach ($get_all_products as $product_sent) { ?>
+                  <tr class="text-center" style="color: white;">
+                     <td><img src="../../admin/asset/img/products/<?= $product_sent['product_image'] ?>" alt="<?= $product_sent['product_image'] ?>" style="width: 150px; height: 150px"></td>
+                     <td><?= $product_sent['product_name'] ?></td>
+                     <td><?= $product_sent['product_price'] ?></td>
+                     <td><?= $order_true['quantity'] ?></td>
+                     <td><?= $order_true['quantity'] * $product_sent['product_price'] ?></td>
+                     <td>
+                        <?php
+                        if ($order_true['order_status'] == 'Active') {
+                           $disabled = ''; ?>
+                           <span class="text-center text-danger text-uppercase">неоплаченный</span>
+                        <?php  } else {
+                           $disabled = 'disabled'; ?>
+                           <span class="text-center text-success text-uppercase">оплаченный</span>
+                        <?php   }
+                        ?>
+                     </td>
+                     <td><button class="btn btn-danger remove" data-id="<?= $product_sent['product_id'] ?>" <?= $disabled ?>>Удалить</button></td>
+                  </tr>
+
+               <?php   }
+               ?>
+
+            <?php   }
+            ?>
+         </tbody>
+      </table>
+   <?php }
+   ?>
+
 </body>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-   integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-   integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-   integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="../asset/js/script.js"></script>
 

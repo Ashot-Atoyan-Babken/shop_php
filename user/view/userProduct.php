@@ -98,7 +98,20 @@ $show_all_prod = $UserModel->show_all_prod($catId);
                      <use href="#icon-customers" />
                   </svg>
                   <p class="timeline__step-title">
-                     <a href="../controller/CartController.php"><img src="../asset/img/svg/free_icon_1.svg" alt="cart"></a>
+                     <a href="../controller/CartController.php"><img src="../asset/img/svg/free_icon_1.svg"
+                           alt="cart"></a>
+                  </p>
+               </div>
+               <div class="timeline__step">
+                  <svg class="timeline__icon timeline__icon--default">
+                     <use href="#icon-customers" />
+                  </svg>
+                  <svg class="timeline__icon timeline__icon--active">
+                     <use href="#icon-customers" />
+                  </svg>
+                  <p class="timeline__step-title">
+                     <a href="../controller/LogOutController.php"><img src="../asset/img/svg/logout.svg"
+                           alt="logout"></a>
                   </p>
                </div>
             </div>
@@ -109,28 +122,31 @@ $show_all_prod = $UserModel->show_all_prod($catId);
       <?php
       if (count($show_all_prod) > 0) {
          foreach ($show_all_prod as $prod) { ?>
-            <div class="card mr-3 mt-3 cont" style="width: 18rem;">
-               <img class="card-img-top" src="../../admin/asset/img/products/<?= $prod['product_image'] ?>" alt="<?= $prod['product_image'] ?>">
-               <div class="card-body">
-                  <h5 class="card-title text-center"><?= $prod['product_name'] ?></h5>
-                  <p class="card-text overflow-auto"><?= $prod['product_content'] ?></p>
-                  <h3><?= $prod['product_price'] ?> USD</h3>
-                  <button data-val="<?= $username ?>" data-id="<?= $prod['id'] ?>" type="submit" class="btn btn-info add" name="add">ADD To Cart</button>
-               </div>
-            </div>
-         <?php
+      <div class="card mr-3 mt-3 cont" style="width: 18rem;">
+         <img class="card-img-top" src="../../admin/asset/img/products/<?= $prod['product_image'] ?>"
+            alt="<?= $prod['product_image'] ?>">
+         <div class="card-body">
+            <h5 class="card-title text-center"><?= $prod['product_name'] ?></h5>
+            <p class="card-text overflow-auto"><?= $prod['product_content'] ?></p>
+            <h3><?= $prod['product_price'] ?> USD</h3>
+            <button data-val="<?= $username ?>" data-id="<?= $prod['product_id'] ?>" type="submit"
+               class="btn btn-info add" name="add">ADD To Cart</button>
+         </div>
+      </div>
+      <?php
          }   ?>
       <?php
       } else { ?>
-         <span class="error-404-wrap">
-            <h1 data-t="404" class="h1">пока что ЗДЕСЬ НИЧЕГО НЕТ <br> Простите</h1>
-         </span>
+      <span class="error-404-wrap">
+         <h1 data-t="404" class="h1">пока что ЗДЕСЬ НИЧЕГО НЕТ <br> Простите</h1>
+      </span>
       <?php  } ?>
    </div>
 
 </body>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="../asset/css/404.css">

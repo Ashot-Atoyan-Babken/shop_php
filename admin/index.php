@@ -17,10 +17,25 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <body>
-
-   <?php
-   include 'view/header.php';
-   ?>
+   <header>
+      <nav class="navbar navbar-expand-lg navbar-dark p-3 bg-dark" id="headerNav">
+         <div class="container-fluid">
+            <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+               <ul class="navbar-nav mx-auto  ">
+                  <li class="nav-item my-auto">
+                     <a class="nav-link mx-2" aria-current="page" href="#">HOME</a>
+                  </li>
+                  <li class="nav-item my-auto">
+                     <a class="nav-link mx-2" href="view/orders.php">ORDERS</a>
+                  </li>
+                  <li class="nav-item ml-auto">
+                     <a class="nav-link mx-2 " href="controller/LogOutController.php">LOG OUT</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+   </header>
    <div class="mx-auto text-center mt-5 w-25 pb-5 pt-3" style="border:1px solid #000; border-radius: 15px; box-shadow: 0px 0px 33px 0px rgba(0,0,0,1)">
       <h4 class=" mb-4 pb-3 text-success text-uppercase">category</h4>
       <div class="form-group ">

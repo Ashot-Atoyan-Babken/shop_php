@@ -100,6 +100,17 @@ $get_all_products_in_cart = $UserModel->get_all_products_in_cart();
                      <a href="order.php">заказы</a>
                   </p>
                </div>
+               <div class="timeline__step">
+                  <svg class="timeline__icon timeline__icon--default">
+                     <use href="#icon-customers" />
+                  </svg>
+                  <svg class="timeline__icon timeline__icon--active">
+                     <use href="#icon-customers" />
+                  </svg>
+                  <p class="timeline__step-title">
+                     <a href="../controller/LogOutController.php"><img src="../asset/img/svg/logout.svg" alt="logout"></a>
+                  </p>
+               </div>
             </div>
          </div>
       </div>
@@ -127,13 +138,13 @@ $get_all_products_in_cart = $UserModel->get_all_products_in_cart();
                            <h5><?= $product['product_price'] ?> USD</h5>
                         </div>
                         <div style="order: 2; margin-left:-120px">
-                           <input type="checkbox" id="<?= $product['id'] ?>" value="<?= $cart_prod['quantity'] ?>">
+                           <input type="checkbox" id="<?= $product['product_id'] ?>" value="<?= $cart_prod['quantity'] ?>">
                         </div>
                      </div>
                      <div class="d-flex align-items-center ml-2" style="margin-top: 140px">
-                        <p data-id="<?= $product['id'] ?>" data-val="<?= $username ?>" class="h5 mr-2 minus" style="cursor:pointer">-</p>
-                        <input data-id="<?= $product['id'] ?>" data-val="<?= $username ?>" data-quan="<?= $cart_prod['quantity'] ?>" type="number" class="count" style="text-align: center; width: 75px; margin-right:10px" value="<?= $cart_prod['quantity'] ?>">
-                        <p data-id="<?= $product['id'] ?>" data-val="<?= $username ?>" class="h5 plus" style="cursor:pointer">
+                        <p data-id="<?= $product['product_id'] ?>" data-val="<?= $username ?>" class="h5 mr-2 minus" style="cursor:pointer">-</p>
+                        <input data-id="<?= $product['product_id'] ?>" data-val="<?= $username ?>" data-quan="<?= $cart_prod['quantity'] ?>" type="number" class="count" style="text-align: center; width: 75px; margin-right:10px" value="<?= $cart_prod['quantity'] ?>">
+                        <p data-id="<?= $product['product_id'] ?>" data-val="<?= $username ?>" class="h5 plus" style="cursor:pointer">
                            +
                         </p>
                      </div>
@@ -147,7 +158,7 @@ $get_all_products_in_cart = $UserModel->get_all_products_in_cart();
       <div class="card" style="width: 18rem;">
          <div class="card-body">
             <h5 class="card-title">Итого <span class="ml-5 span"><?= $total ?></span></h5>
-            <button class="btn btn-info mt-5 mb-3 create-order">Оплатить</button>
+            <button class="btn btn-info mt-5 mb-3 create-order" data-val="<?= $username ?>">Оплатить</button>
             <p>Соглашаюсь c правилами пользования торговой площадки и возврата</p>
          </div>
       </div>

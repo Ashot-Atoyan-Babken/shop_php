@@ -226,12 +226,14 @@ $(function () {
       let values = $('input[type="checkbox"]:checked').map(function () {
          return this.value;
       }).get();
+      let username = $(this).data('val');
       $.ajax({
          url: '../controller/OrderController.php',
          method: "POST",
          data: {
             ids,
             values,
+            username,
             action: 'create-order',
          },
          success: function (data) {
@@ -253,7 +255,20 @@ $(function () {
          }
       })
    })
-
+   $('.send_order').on('click', function () {
+      let username = $(this).data('val');
+      $.ajax({
+         url: '../controller/OrderController.php',
+         method: 'post',
+         data: {
+            username,
+            action: 'send_order',
+         },
+         success: function (data) {
+            location.reload();
+         }
+      })
+   })
 })
 
 
