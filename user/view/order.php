@@ -2,12 +2,8 @@
 session_start();
 include 'header.php';
 include '../model/UserModel.php';
-$show_all_prod = $UserModel->show_all_prod($catId);
-
+$get_all_products_in_order = $UserModel->get_all_products_in_order();
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,9 +15,10 @@ $show_all_prod = $UserModel->show_all_prod($catId);
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css'>
-   <link rel="shortcut icon" href="../asset/img/svg/games.svg" type="image/x-icon">
+   <link rel="shortcut icon" href="../asset/img/svg/cart.svg" type="image/x-icon">
+   <link rel="stylesheet" href="../asset/css/404.css">
 
-   <title>Games</title>
+   <title>Корзина</title>
 </head>
 
 <body style="background: #141C24;">
@@ -90,50 +87,77 @@ $show_all_prod = $UserModel->show_all_prod($catId);
                      Контакты
                   </p>
                </div>
-               <div class="timeline__step">
-                  <svg class="timeline__icon timeline__icon--default">
-                     <use href="#icon-customers" />
-                  </svg>
-                  <svg class="timeline__icon timeline__icon--active">
-                     <use href="#icon-customers" />
-                  </svg>
-                  <p class="timeline__step-title">
-                     <a href="../controller/CartController.php"><img src="../asset/img/svg/free_icon_1.svg" alt="cart"></a>
-                  </p>
-               </div>
             </div>
          </div>
       </div>
    </div>
-   <div class="body">
-      <?php
-      if (count($show_all_prod) > 0) {
-         foreach ($show_all_prod as $prod) { ?>
-            <div class="card mr-3 mt-3 cont" style="width: 18rem;">
-               <img class="card-img-top" src="../../admin/asset/img/products/<?= $prod['product_image'] ?>" alt="<?= $prod['product_image'] ?>">
-               <div class="card-body">
-                  <h5 class="card-title text-center"><?= $prod['product_name'] ?></h5>
-                  <p class="card-text overflow-auto"><?= $prod['product_content'] ?></p>
-                  <h3><?= $prod['product_price'] ?> USD</h3>
-                  <button data-val="<?= $username ?>" data-id="<?= $prod['id'] ?>" type="submit" class="btn btn-info add" name="add">ADD To Cart</button>
-               </div>
-            </div>
+   <p class="text-warning h1 text-center text-uppercase mb-5">новые заказы</p>
+   <table class="table table-hover mx-auto mt-5" style="width: 80%;border:1px solid #000">
+      <thead class="thead-dark">
+         <tr>
+            <th class="text-center">Картинка</th>
+            <th class="text-center">Имя</th>
+            <th class="text-center">Цена</th>
+            <th class="text-center">Количество</th>
+            <th class="text-center">Общая сумма</th>
+            <th class="text-center">Действие</th>
+         </tr>
+      </thead>
+      <tbody>
          <?php
-         }   ?>
-      <?php
-      } else { ?>
-         <span class="error-404-wrap">
-            <h1 data-t="404" class="h1">пока что ЗДЕСЬ НИЧЕГО НЕТ <br> Простите</h1>
-         </span>
-      <?php  } ?>
-   </div>
+         $total = 0;
+         if (count($get_all_products_in_order) > 0) {
+            foreach ($get_all_products_in_order as $order) {
+               $get_all_products = $UserModel->get_all_products($order['order_product_id']);
+               foreach ($get_all_products as $product) { ?>
+         <tr class="text-center" style="color: white;">
+            <td><img src="../../admin/asset/img/products/<?= $product['product_image'] ?>"
+                  alt="<?= $product['product_image'] ?>" style="width: 150px; height: 150px"></td>
+            <td><?= $product['product_name'] ?></td>
+            <td><?= $product['product_price'] ?> USD</td>
+            <td><?= $order['quantity'] ?></td>
+            <td><?= $product['product_price'] * $order['quantity'] ?></td>
+            <td><button class="btn btn-danger remove" data-id="<?= $product['id'] ?>">Удалить</button></td>
+         </tr>
+         <?php
+                  $total += $product['product_price'] * $order['quantity'];
+               }
+            }
+         }  ?>
 
+      </tbody>
+   </table>
+   <div class="d-flex justify-content-center align-items-center">
+      <button class="btn btn-success mt-5 mb-5" style="margin-right:63%">Отправить заказ</button>
+      <p class="text-warning h6 text-uppercase mt-5 mb-5">Общая сумма <?= $total ?> USD</p>
+   </div>
+   <p class="text-warning h1 text-center text-uppercase mb-5">отправленные заказы</p>
+   <table class="table table-hover mx-auto mt-5" style="width: 80%;border:1px solid #000">
+      <thead class="thead-dark">
+         <tr>
+            <th class="text-center">Картинка</th>
+            <th class="text-center">Имя</th>
+            <th class="text-center">Цена</th>
+            <th class="text-center">Количество</th>
+            <th class="text-center">Общая сумма</th>
+            <th class="text-center">Статус</th>
+            <th class="text-center">Действие</th>
+         </tr>
+      </thead>
+   </table>
 </body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+   integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+   integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
+</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="../asset/css/404.css">
 <script src="../asset/js/script.js"></script>
 
 </html>

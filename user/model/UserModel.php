@@ -93,5 +93,45 @@ class User
       $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
       return $result;
    }
+   public function cart_quantity_update_plus($username, $prodId, $quantity)
+   {
+      $query = "UPDATE `carts` SET `quantity`= quantity + $quantity WHERE `product_id`='$prodId' AND `username`='$username'";
+      $res = mysqli_query($this->conn, $query);
+      return $res;
+   }
+   public function cart_quantity_update_minus($username, $prodId, $quantity)
+   {
+      $query = "UPDATE `carts` SET `quantity`= quantity - $quantity WHERE `product_id`='$prodId' AND `username`='$username'";
+      $res = mysqli_query($this->conn, $query);
+      return $res;
+   }
+   public function cart_quantity_update($username, $prodId, $quantity)
+   {
+      $query = "UPDATE `carts` SET `quantity` = $quantity WHERE `product_id` = '$prodId' AND `username`='$username'";
+      $res = mysqli_query($this->conn, $query);
+      return $res;
+   }
+   public function create_order($id, $value)
+   {
+      $query = "INSERT INTO `orders` VALUES (NULL,'$id','$value',DEFAULT)";
+      $res = mysqli_query($this->conn, $query);
+   }
+   public function delete_carts_item($id)
+   {
+      $query = "DELETE FROM `carts` WHERE `product_id` = '$id'";
+      $res = mysqli_query($this->conn, $query);
+   }
+   public function get_all_products_in_order()
+   {
+      $query = "SELECT * FROM `orders`";
+      $res = mysqli_query($this->conn, $query);
+      $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
+      return $result;
+   }
+   public function remove_order($id)
+   {
+      $query = "DELETE FROM `orders` WHERE `order_product_id` = $id";
+      $res = mysqli_query($this->conn, $query);
+   }
 }
 $UserModel = new User();

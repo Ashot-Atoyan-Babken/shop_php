@@ -163,17 +163,97 @@ $(function () {
          }
       })
    })
-   $('.create-order').on('click', function () {
+   $('.minus').on('click', function () {
+      let username = $(this).data('val');
+      let prodId = $(this).data('id');
       $.ajax({
-         url: '../controller/OrderController.php',
+         url: '../controller/CountController.php',
          method: 'post',
-         datatype: 'json',
+         dataType: 'json',
          data: {
-            action: 'create-order',
+            username,
+            prodId,
+            action: 'minus',
          },
-         success: function () {
-
+         success: function (data) {
+            location.reload();
          }
       })
    })
+   $('.plus').on('click', function () {
+      let username = $(this).data('val');
+      let prodId = $(this).data('id');
+      $.ajax({
+         url: '../controller/CountController.php',
+         method: 'post',
+         dataType: 'json',
+         data: {
+            username,
+            prodId,
+            action: 'plus',
+         },
+         success: function (data) {
+            location.reload();
+         }
+      })
+   })
+   $('.count').on('change', function () {
+      let username = $(this).data('val');
+      let prodId = $(this).data('id');
+      let value = $(this).val();
+      if (value <= 0) {
+         value = 1
+      }
+      $.ajax({
+         url: '../controller/CountController.php',
+         method: 'post',
+         dataType: 'json',
+         data: {
+            username,
+            prodId,
+            value,
+            action: 'count',
+         },
+         success: function (data) {
+            location.reload();
+         }
+      })
+   })
+   $('.create-order').on('click', function () {
+      let ids = $('input[type="checkbox"]:checked').map(function () {
+         return this.id;
+      }).get();
+      let values = $('input[type="checkbox"]:checked').map(function () {
+         return this.value;
+      }).get();
+      $.ajax({
+         url: '../controller/OrderController.php',
+         method: "POST",
+         data: {
+            ids,
+            values,
+            action: 'create-order',
+         },
+         success: function (data) {
+            location.href = 'order.php';
+         }
+      })
+   })
+   $('.remove').on('click', function () {
+      let id = $(this).data("id");
+      $.ajax({
+         url: '../controller/OrderController.php',
+         method: 'post',
+         data: {
+            id,
+            action: 'remove',
+         },
+         success: function () {
+            location.reload();
+         }
+      })
+   })
+
 })
+
+
