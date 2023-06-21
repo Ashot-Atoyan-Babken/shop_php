@@ -1,9 +1,6 @@
 <?php
 session_start();
 include("model/UserModel.php");
-if (!isset($_SESSION['username'])) {
-   header('location:view/userRegister.php');
-}
 ?>
 
 <!DOCTYPE html>

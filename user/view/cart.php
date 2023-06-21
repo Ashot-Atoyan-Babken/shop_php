@@ -3,6 +3,9 @@ session_start();
 include 'header.php';
 include '../model/UserModel.php';
 $get_all_products_in_cart = $UserModel->get_all_products_in_cart();
+if (!isset($_SESSION['username'])) {
+   header('location:userRegister.php');
+}
 ?>
 
 

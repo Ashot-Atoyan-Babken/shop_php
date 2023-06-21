@@ -65,10 +65,9 @@ class Admin
       $result = mysqli_fetch_all($res, MYSQLI_ASSOC);
       return $result;
    }
-   public function create_product($prod_img, $prod_name, $prod_price, $prod_desc, $id)
+   public function create_product($name, $prod_name, $prod_price, $prod_desc, $id)
    {
-      $query = "INSERT INTO `product`(`product_id`, `product_image`, `product_name`, `product_price`, `product_content`, `product_status`, `category_id`)
-       VALUES (NULL,'$prod_img','$prod_name','$prod_price','$prod_desc',DEFAULT,'$id')";
+      $query = "INSERT INTO `product` VALUES (NULL,'$name','$prod_name','$prod_price','$prod_desc',DEFAULT,'$id')";
       $res = mysqli_query($this->conn, $query);
    }
    public function update_product($prod_image, $prod_name, $prod_price, $prod_desc, $id)

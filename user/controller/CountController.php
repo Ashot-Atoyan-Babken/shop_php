@@ -13,6 +13,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add') {
       $quantity = 1;
       $cart_update = $UserModel->cart_update($username, $prodId, $quantity);
       if ($cart_update) {
+         header('location:../view/userLogin.php');
          $returnArr['action'] = 1;
          $returnArr['message'] = 'updated successful';
       } else {
