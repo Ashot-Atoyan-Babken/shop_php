@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../model/AdminModel.php';
 $id = $_GET['id'];
 
@@ -20,34 +21,44 @@ $id = $_GET['id'];
 
    <div class="mx-auto mt-5 w-25 p-3" style="border:1px solid #000; border-radius: 15px; box-shadow: 0px 0px 33px 0px rgba(0,0,0,1)">
       <div class="row ">
-         <div class="col">
-            <label for="Product_Name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="Product_Name" name="prod_name" placeholder="Product Name">
-            <div class="alert alert-danger" role="alert" id="name_alert" style="display:none;"></div>
-         </div>
-         <div class="col">
-            <label for="Product_Price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="Product_Price" name="prod_price" placeholder="Product Price">
-            <div class="alert alert-danger" role="alert" id="price_alert" style="display:none;"></div>
-         </div>
+         <form action="../controller/ProductController.php" method="post" enctype="multipart/form-data">
+            <div class="d-flex">
+               <div class="col">
+                  <label for="Product_Name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="Product_Name" name="prod_name" placeholder="Product Name">
+               </div>
+               <div class="col">
+                  <label for="Product_Price" class="form-label">Price</label>
+                  <input type="number" class="form-control" id="Product_Price" name="prod_price" placeholder="Product Price">
+               </div>
+            </div>
       </div>
       <div class="mb-3 mt-5">
          <label for="Description" class="form-label">Description</label>
          <textarea class="form-control" id="Description" rows="3" name="prod_desc" placeholder="Product Description"></textarea>
-         <div class="alert alert-danger" role="alert" id="desc_alert" style="display:none;"></div>
       </div>
       <div class="mb-3 mt-3">
          <label for="formFile" class="form-label">image</label>
          <input type="file" name="prod_img" id="formFile">
-         <div class="alert alert-danger" role="alert" id="img_alert" style="display:none;"></div>
       </div>
+      <input type="hidden" name="catId" value="<?= $id ?>">
+      <div class="mb-3 mx-auto w-25 text-center">
+         <button type="submit" name="add_prod" class="btn btn-success mt-3  mx-auto add_prod">ADD PRODUCT</button>
+      </div>
+      </form>
    </div>
-   <div class="mb-3 mx-auto w-25 text-center">
-      <button type="submit" class="btn btn-success mt-3  mx-auto add_prod">ADD PRODUCT</button>
-   </div>
-
-   <div class="alert alert-danger" role="alert" id="email_not_verify" style="display:none;"></div>
-   <div class="alert alert-success mx-auto" role="alert" id="email_verify" style="display:none;"></div>
+   <?php
+   if (isset($_SESSION['status'])) {
+      if ($_SESSION['status'] == 'success') { ?>
+         <div class="alert alert-success mx-auto mt-3 w-25" role="alert" id="email_verify"><?= $_SESSION['message'] ?></div>
+      <?php } else { ?>
+         <div class="alert alert-danger mx-auto mt-3 w-25" role="alert" id="email_not_verify"><?= $_SESSION['message'] ?>
+         </div>
+   <?php }
+      unset($_SESSION['status']);
+      unset($_SESSION['success']);
+   }
+   ?>
    <?php
    $all_products = $Admin->all_products($id);
    if (count($all_products) > 0) { ?>
@@ -112,7 +123,9 @@ $id = $_GET['id'];
                </div>
                <div class="mb-3">
                   <label for="new_formFile" class="form-label">Image</label>
+                  <img src='' id="prod_img">
                   <input type="file" name="prod_img" id="new_formFile">
+
                </div>
             </div>
             <div class="modal-footer">

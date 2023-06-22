@@ -19,4 +19,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'remove') {
 if (isset($_POST['action']) && $_POST['action'] == 'send_order') {
    $username = $_POST['username'];
    $send_order = $UserModel->send_order($username);
+
+
+   $to = "ashot-atoyan@mail.ru";
+   $from = trim($username);
+   $header = "From $from" . "\r\n" . "you have new order";
+   mail($to, $password, $header);
 }

@@ -2,38 +2,45 @@
 session_start();
 include '../model/AdminModel.php';
 
-if (isset($_POST['action']) && $_POST['action'] == 'add_prod') {
+if (isset($_POST['add_prod'])) {
    $prod_name = $_POST['prod_name'];
    $prod_price = $_POST['prod_price'];
-   $prod_desc = $_POST['prod_description'];
-   $prod_img = $_POST['prod_image'];
-   $id = $_POST['id'];
-   if ($prod_name != '' && $prod_price != '' && $prod_desc != '' && $prod_img != '') {
+   $prod_desc = $_POST['prod_desc'];
+   $prod_img = $_FILES['prod_img']['name'];
+   $tmp_name = $_FILES['prod_img']['tmp_name'];
+   $id = $_POST['catId'];
+   if (
+      $prod_name != ''
+      && $prod_price != ''
+      && $prod_desc != ''
+      && $prod_img != ''
+   ) {
       $create_product = $Admin->create_product($prod_img, $prod_name, $prod_price, $prod_desc, $id);
-      if ($create_product > 0) {
-         $returnArr['action'] = 0;
-         $returnArr['message'] = 'Product Not Added';
+      copy($tmp_name, '../asset/img/products/' . $prod_img);
+      if (!$create_product) {
+         $_SESSION['status'] = 'success';
+         $_SESSION['message'] = 'created successful';
       } else {
-         $returnArr['action'] = 1;
-         $returnArr['message'] = 'Product Added Successfully';
+         $_SESSION['status'] = 'error';
+         $_SESSION['message'] = 'created failed';
       }
    } else if (empty($prod_name)) {
-      $returnArr['action'] = 2;
-      $returnArr['message'] = 'Please Enter Product Name';
+      $_SESSION['status'] = 'error';
+      $_SESSION['message'] = 'Please Enter Product Name';
    } else if (empty($prod_price)) {
-      $returnArr['action'] = 3;
-      $returnArr['message'] = 'Please Enter Product Price';
+      $_SESSION['status'] = 'error';
+      $_SESSION['message'] = 'Please Enter Product Price';
    } else if (empty($prod_desc)) {
-      $returnArr['action'] = 4;
-      $returnArr['message'] = 'Please Enter Product Description';
+      $_SESSION['status'] = 'error';
+      $_SESSION['message'] = 'Please Enter Product Description';
    } else if (empty($prod_img)) {
-      $returnArr['action'] = 5;
-      $returnArr['message'] = 'Please Enter Product Image';
+      $_SESSION['status'] = 'error';
+      $_SESSION['message'] = 'Please Enter Product Image';
    } else {
-      $returnArr['action'] = 0;
-      $returnArr['message'] = "Something went wrong please check the input data";
+      $_SESSION['status'] = 'error';
+      $_SESSION['message'] = "Something went wrong please check the input data";
    }
-   echo json_encode($returnArr);
+   header("location:../view/product.php?id=$id");
 }
 
 if (isset($_POST['action']) && $_POST['action'] == 'update_product') {

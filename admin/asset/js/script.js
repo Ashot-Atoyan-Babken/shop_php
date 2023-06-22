@@ -196,79 +196,6 @@ $(function () {
       })
 
    })
-   $('.add_prod').on('click', function () {
-      let prod_name = $('#Product_Name').val();
-      let prod_price = $('#Product_Price').val();
-      let prod_description = $('#Description').val();
-      let prod_image = $('input[type=file]').val().replace(/.*(\/|\\)/, '');
-      var id = Number(jQuery.param(window.location.search)[jQuery.param(window.location.search).length - 1]);
-      $.ajax({
-         url: '../controller/ProductController.php',
-         method: 'post',
-         dataType: 'json',
-         data: {
-            prod_name,
-            prod_price,
-            prod_description,
-            prod_image,
-            id,
-            action: 'add_prod',
-         },
-         success: function (data) {
-            console.log(data);
-            if (data['action'] == 2) {
-               $('#name_alert').html(data['message'])
-               $('#name_alert').fadeIn()
-               $('#name_alert').fadeOut(2000)
-               setTimeout(() => {
-                  location.reload()
-               }, 2500);
-            } else if (data['action'] == 3) {
-               $('#price_alert').html(data['message'])
-               $('#price_alert').fadeIn()
-               $('#price_alert').fadeOut(2000)
-               setTimeout(() => {
-                  location.reload()
-               }, 2500);
-            } else if (data['action'] == 4) {
-               $('#desc_alert').html(data['message'])
-               $('#desc_alert').fadeIn()
-               $('#desc_alert').fadeOut(2000)
-               setTimeout(() => {
-                  location.reload()
-               }, 2500);
-            } else if (data['action'] == 5) {
-               $('#img_alert').html(data['message'])
-               $('#img_alert').fadeIn()
-               $('#img_alert').fadeOut(2000)
-               setTimeout(() => {
-                  location.reload()
-               }, 2500);
-            } else if (data['action'] == 6) {
-               $('#img_alert').html(data['message'])
-               $('#img_alert').fadeIn()
-               $('#img_alert').fadeOut(2000)
-               setTimeout(() => {
-                  location.reload()
-               }, 2500);
-            } else if (data['action'] == 0) {
-               $('#email_not_verify').html(data['message'])
-               $('#email_not_verify').fadeIn()
-               $('#email_not_verify').fadeOut(2000)
-               setTimeout(() => {
-                  location.reload()
-               }, 2500);
-            } else if (data['action'] == 1) {
-               $('#email_verify').html(data['message'])
-               $('#email_verify').fadeIn()
-               $('#email_verify').fadeOut(2000)
-               setTimeout(() => {
-                  location.reload()
-               }, 1000);
-            }
-         }
-      })
-   })
    $('.edit_prod').on('click', function () {
       let id = $(this).data('id');
       $.ajax({
@@ -286,6 +213,8 @@ $(function () {
                $('#new_Description').html(value['product_content']);
                $('#new_Product_Name').val(value['product_name']);
                $('#new_Product_Price').val(value['product_price']);
+               $('#new_formFile').attr('src', '../asset/img/products/' + value['product_image']);
+               $('#prod_img').attr('src', '../asset/img/products/' + value['product_image']);
             })
          }
       })
@@ -361,11 +290,14 @@ $(function () {
    })
    $('.confirm').on('click', function () {
       let prod_id = $(this).data('id');
+      let e_mail = $(this).data('email');
+
       $.ajax({
          url: '../controller/OrderController.php',
          type: "POST",
          data: {
             prod_id,
+            e_mail,
             action: 'confirm',
          },
          success: function () {

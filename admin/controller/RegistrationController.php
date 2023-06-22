@@ -2,8 +2,6 @@
 session_start();
 include '../model/AdminModel.php';
 
-
-
 $userNameVerify = "/^[a-z\d_]{5,20}$/i";
 $passwordVerify = "/^[a-z\d_]{5,20}$/i";
 
