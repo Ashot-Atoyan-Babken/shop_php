@@ -123,7 +123,7 @@ $id = $_GET['id'];
                </div>
                <div class="mb-3">
                   <label for="new_formFile" class="form-label">Image</label>
-                  <img src='' id="prod_img">
+                  <img src='' id="prod_img" class="w-25">
                   <input type="file" name="prod_img" id="new_formFile">
 
                </div>
